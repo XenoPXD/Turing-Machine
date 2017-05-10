@@ -4,7 +4,7 @@ package pxd.turing.machine.impl;
  * Action that tells the machine what symbol to write on the tape, how to move the playhead
  * (eg "G" for a box to the left, "D" for a box to the right), and what is the new state.
  * @author Xavier PRUNCK
- * @version 1.1, 24/04/2017
+ * @version 1.2, 24/04/2017
  */
 public class Action {
 
