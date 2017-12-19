@@ -50,19 +50,10 @@ def clear():
     else:
         os.system("clear")
 
-def randomT():
-    letterFirst = chr(random.randint(97, 110))
-    print(letterFirst)
-    if letterFirst != "a":
-        w = ""
-        randomT()
-    print ("w="+w)
-    return w
-    
 def randomWord():
     letterFirst = chr(random.randint(97, 122))
     letterSecond = chr(random.randint(97, 122))
-    print(letterFirst+letterSecond)
+    #print(letterFirst+letterSecond)
     createWordsDict(letterFirst+letterSecond)
     out = choiceWordFile()
     if out != "":
@@ -82,10 +73,10 @@ def choiceWordFile():
         result = re.search('"(.*)"', line)
         if (result != None):
             aWords.append(result.group(0).replace('"', ""))
-            print(result.group(0))
+            #print(result.group(0))
             i+=1
     if i>0:
-        print("i="+str(i))
+        #print("i="+str(i))
         out = aWords[random.randint(0, i)]
     return out
     
@@ -110,8 +101,8 @@ else:
     sys.exit()
 
 #word = getpass.getpass('Entrez un mot à deviner : ')
-#clear()
-print("word="+word)
+clear()
+#print("word="+word)
 gagne=False
 completing=""
 counter=0
@@ -128,7 +119,7 @@ while counter<6 or gagne==True:
     print(chars)
     print()
     char = input("Entrez une lettre : ")
-    #clear()
+    clear()
     chars = chars + " " + char
     counter=getNbrErrors(word, chars)
     print()
