@@ -11,6 +11,8 @@ hangman.append("+--+\n|  o\n| /|\\\n|\\")
 hangman.append("+--+\n|  o\n| /|\\\n|\\/")
 hangman.append("+--+\n|  o\n| /|\\\n|\\/ \\")
 
+wordGlobal=""
+
 def getNbrErrors(word, chars):
     counter=0
     for cc in chars:
@@ -58,8 +60,8 @@ def randomWord():
     word = choiceWordFile()
     if word == "":
         randomWord()
+    wordGlobal=word
     print ("word="+word)
-    return word
         
 def createWordsDict(value):
     os.system("curl dict://dict.org/m:^^"+value+".*:fd-fra-eng:re > words.txt")
@@ -93,15 +95,16 @@ word=""
 reponse = input("Choix du mot automatique ? [O/N] ")
 reponse = reponse.strip().lower()
 if reponse.startswith('o'):
-    word = randomWord()
+    randomWord()
 elif reponse.startswith('n') or reponse == '':
-    word = getpass.getpass('Entrez un mot à deviner : ')
+    wordGlobal = getpass.getpass('Entrez un mot à deviner : ')
 else:
     print("Répondez par 'o' ou 'n'")
     sys.exit()
 
 #word = getpass.getpass('Entrez un mot à deviner : ')
 #clear()
+word = wordGlobal 
 gagne=False
 completing=""
 counter=0
