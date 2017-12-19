@@ -66,7 +66,7 @@ def randomWord():
         randomWord()
         
 def createWordsDict(value):
-    os.system("curl dict://dict.org/m:^^"+value+".*:fd-fra-eng:re > words.txt")
+    os.system("curl -s dict://dict.org/m:^^"+value+".*:fd-fra-eng:re > words.txt")
     
 def choiceWordFile():
     oFile = open("words.txt","r") 
