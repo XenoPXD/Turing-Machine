@@ -68,7 +68,6 @@ def randomWord():
     createWordsDict(letterFirst+letterSecond)
     word = choiceWordFile()
     if word != "":
-        print ("word="+word)
         return word
     else:
         randomWord()
@@ -105,16 +104,16 @@ word=""
 reponse = input("Choix du mot automatique ? [O/N] ")
 reponse = reponse.strip().lower()
 if reponse.startswith('o'):
-    randomWord()
+    word = randomWord()
 elif reponse.startswith('n') or reponse == '':
-    wordGlobal = getpass.getpass('Entrez un mot à deviner : ')
+    word = getpass.getpass('Entrez un mot à deviner : ')
 else:
     print("Répondez par 'o' ou 'n'")
     sys.exit()
 
 #word = getpass.getpass('Entrez un mot à deviner : ')
 #clear()
-word = wordGlobal 
+print("word="+word)
 gagne=False
 completing=""
 counter=0
