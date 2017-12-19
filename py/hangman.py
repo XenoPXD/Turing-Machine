@@ -52,16 +52,26 @@ def clear():
     else:
         os.system("clear")
 
+def randomT():
+    letterFirst = chr(random.randint(97, 110))
+    print(letterFirst)
+    if letterFirst != "a":
+        w = ""
+        randomT()
+    print ("w="+w)
+    return w
+    
 def randomWord():
     letterFirst = chr(random.randint(97, 122))
     letterSecond = chr(random.randint(97, 122))
     print(letterFirst+letterSecond)
     createWordsDict(letterFirst+letterSecond)
     word = choiceWordFile()
-    if word == "":
+    if word != "":
+        print ("word="+word)
+        return word
+    else:
         randomWord()
-    wordGlobal=word
-    print ("word="+word)
         
 def createWordsDict(value):
     os.system("curl dict://dict.org/m:^^"+value+".*:fd-fra-eng:re > words.txt")
