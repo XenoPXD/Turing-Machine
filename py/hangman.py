@@ -1,4 +1,5 @@
-import sys, os
+import sys, os, re
+import random
 import getpass
 
 hangman=[]
@@ -49,9 +50,57 @@ def clear():
     else:
         os.system("clear")
 
+def randomWord():
+    letterFirst = chr(random.randint(97, 122))
+    letterSecond = chr(random.randint(97, 122))
+    print(letterFirst+letterSecond)
+    #createWordsDict(letterFirst+letterSecond)
+    word = choiceWordFile()
+    if word == "":
+        randomWord()
+    return word
+        
+def createWordsDict(value):
+    os.system("curl dict://dict.org/m:^^"+value+".*:fd-fra-eng:re > words.txt")
+    
+def choiceWordFile():
+    oFile = open("words.txt","r") 
+    aWords = []
+    out = ""
+    i = 0
+    for line in oFile.readlines():
+        result = re.search('"(.*)"', line)
+        if (result != None):
+            aWords.append(result.group(0).replace('"', ""))
+            print(result.group(0))
+            i+=1
+    if i>0:
+        print("i="+str(i))
+        out = aWords[random.randint(0, i)]
+    return out
+    
+    
+    
+# http://www.dict.org/bin/Dict
+# http://www.dict.org/rfc2229.txt
+# http://www.dict.org/links.html
+# http://search.cpan.org/~neilb/Net-Dict-2.21/dict
+# curl dict://dict.org/s:regexp::m[a-z]::d:
+# curl dict://dict.org/m:[a]::regexp
 
-word = getpass.getpass('Entrez un mot à deviner : ')
-clear()
+word=""
+reponse = input("Choix du mot automatique ? [o/N] ")
+reponse = reponse.strip().lower()
+if reponse.startswith('o'):
+    word = randomWord()
+elif reponse.startswith('n') or reponse == '':
+    word = getpass.getpass('Entrez un mot à deviner : ')
+else:
+    print("Répondez par 'o' ou 'n'")
+    sys.exit()
+
+#word = getpass.getpass('Entrez un mot à deviner : ')
+#clear()
 gagne=False
 completing=""
 counter=0
@@ -64,7 +113,7 @@ print(completing)
 
 while counter<6 or gagne==True:
     print()
-    print("Lettres deja utilisé :")
+    print("Lettres utilisées :")
     print(chars)
     print()
     char = input("Entrez une lettre : ")
