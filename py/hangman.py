@@ -56,6 +56,7 @@ def clear():
         os.system("clear")
 
 def randomWord():
+    print("."),
     letterFirst = chr(random.randint(97, 122))
     letterSecond = chr(random.randint(97, 122))
     createWordsDict(letterFirst+letterSecond)
@@ -97,7 +98,9 @@ word=""
 reponse = input("Choix du mot automatique ? [O/N] ")
 reponse = reponse.strip().lower()
 if reponse.startswith('o'):
+    print("Recherche d'un mot sur dict.org:"),
     word = randomWord()
+    print()
 elif reponse.startswith('n') or reponse == '':
     word = getpass.getpass('Entrez un mot à deviner : ')
 else:
