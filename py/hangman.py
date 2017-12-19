@@ -1,6 +1,7 @@
 import sys, os, re
 import random
 import getpass
+import unicodedata
 
 hangman=[]
 hangman.append("+--+\n|\n|\n|\\")
@@ -11,6 +12,10 @@ hangman.append("+--+\n|  o\n| /|\\\n|\\")
 hangman.append("+--+\n|  o\n| /|\\\n|\\/")
 hangman.append("+--+\n|  o\n| /|\\\n|\\/ \\")
 
+def strip_accents(s):
+    return ''.join(c for c in unicodedata.normalize('NFD', s)
+                  if unicodedata.category(c) != 'Mn')
+
 def getNbrErrors(word, chars):
     counter=0
     for cc in chars:
@@ -18,7 +23,7 @@ def getNbrErrors(word, chars):
         if cc != " ":
             trouve=False
             for cw in word:
-                if cw.upper() == cc.upper():
+                if strip_accents(cw.upper()) == cc.upper():
                     trouve=True
                     word = word.replace(cw, ' ')
             if trouve==False: 
@@ -32,7 +37,7 @@ def completeWord(word, chars):
             trouve=False
             for cc in chars:
                 if cc != " ":
-                    if cw.upper() == cc.upper():
+                    if strip_accents(cw.upper()) == cc.upper():
                         trouve=True
         else:
             trouve=True
@@ -53,7 +58,6 @@ def clear():
 def randomWord():
     letterFirst = chr(random.randint(97, 122))
     letterSecond = chr(random.randint(97, 122))
-    #print(letterFirst+letterSecond)
     createWordsDict(letterFirst+letterSecond)
     out = choiceWordFile()
     if out != "":
