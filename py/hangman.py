@@ -58,6 +58,7 @@ def randomWord():
     word = choiceWordFile()
     if word == "":
         randomWord()
+    print ("word="+word)
     return word
         
 def createWordsDict(value):
