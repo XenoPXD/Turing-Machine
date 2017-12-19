@@ -56,14 +56,19 @@ def clear():
         os.system("clear")
 
 def randomWord():
+    #print(".")
+    sys.stdout.write('.')
+    sys.stdout.flush()
     letterFirst = chr(random.randint(97, 122))
     letterSecond = chr(random.randint(97, 122))
     createWordsDict(letterFirst+letterSecond)
     out = choiceWordFile()
-    if out != "":
+    #print("randomWord : out="+str(out))
+    if out != "" and out != None:
         return out
     else:
-        randomWord()
+        out = randomWord()
+        return out
         
 def createWordsDict(value):
     os.system("curl -s dict://dict.org/m:^^"+value+".*:fd-fra-eng:re > words.txt")
@@ -81,7 +86,10 @@ def choiceWordFile():
             i+=1
     if i>0:
         #print("i="+str(i))
-        out = aWords[random.randint(0, i)]
+        r = random.randint(0, i-1)
+        #print("r="+str(r))
+        out = aWords[r]
+        #print("choiceWordFile : out="+str(out))
     return out
     
     
@@ -107,7 +115,7 @@ else:
 
 #word = getpass.getpass('Entrez un mot à deviner : ')
 clear()
-#print("word="+word)
+#print("word="+str(word))
 gagne=False
 completing=""
 counter=0
