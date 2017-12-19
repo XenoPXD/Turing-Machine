@@ -11,8 +11,6 @@ hangman.append("+--+\n|  o\n| /|\\\n|\\")
 hangman.append("+--+\n|  o\n| /|\\\n|\\/")
 hangman.append("+--+\n|  o\n| /|\\\n|\\/ \\")
 
-wordGlobal=""
-
 def getNbrErrors(word, chars):
     counter=0
     for cc in chars:
@@ -66,9 +64,9 @@ def randomWord():
     letterSecond = chr(random.randint(97, 122))
     print(letterFirst+letterSecond)
     createWordsDict(letterFirst+letterSecond)
-    word = choiceWordFile()
-    if word != "":
-        return word
+    out = choiceWordFile()
+    if out != "":
+        return out
     else:
         randomWord()
         
@@ -130,7 +128,7 @@ while counter<6 or gagne==True:
     print(chars)
     print()
     char = input("Entrez une lettre : ")
-    clear()
+    #clear()
     chars = chars + " " + char
     counter=getNbrErrors(word, chars)
     print()
