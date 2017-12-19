@@ -54,7 +54,7 @@ def randomWord():
     letterFirst = chr(random.randint(97, 122))
     letterSecond = chr(random.randint(97, 122))
     print(letterFirst+letterSecond)
-    #createWordsDict(letterFirst+letterSecond)
+    createWordsDict(letterFirst+letterSecond)
     word = choiceWordFile()
     if word == "":
         randomWord()
@@ -89,7 +89,7 @@ def choiceWordFile():
 # curl dict://dict.org/m:[a]::regexp
 
 word=""
-reponse = input("Choix du mot automatique ? [o/N] ")
+reponse = input("Choix du mot automatique ? [O/N] ")
 reponse = reponse.strip().lower()
 if reponse.startswith('o'):
     word = randomWord()
